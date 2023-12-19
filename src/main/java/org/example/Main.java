@@ -21,11 +21,17 @@ public class Main {
 //            throw new RuntimeException(e);
 //        }
 
-        generateClass();
+        byte[] b = generateClass();
+
+        MyClassLoader myCL = new MyClassLoader();
+        // 通过CLassLoader加载类
+        Class cl = myCL.defineClass("pkg.Comparable", b);
+
+        System.out.println(cl.getCanonicalName());
     }
 
 
-    private static void generateClass() {
+    private static byte[] generateClass() {
         ClassWriter cw = new ClassWriter(0);
         cw.visit(V1_5,ACC_PUBLIC + ACC_ABSTRACT + ACC_INTERFACE,
                 "pkg/Comparable",null,"java/lang/Object",
@@ -51,5 +57,6 @@ public class Main {
         byte[] b = cw.toByteArray();
 
         System.out.println(b);
+        return b;
     }
 }
