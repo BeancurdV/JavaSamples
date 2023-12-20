@@ -1,6 +1,6 @@
 package org.example.bean;
 
-public class Person implements IFriendly{
+public class Person implements IFriendly {
     private String name;
     private int age;
 

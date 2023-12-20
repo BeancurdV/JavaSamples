@@ -1,4 +1,4 @@
-package org.example;
+package org.example.asm;
 
 public class MyClassLoader extends ClassLoader{
 
