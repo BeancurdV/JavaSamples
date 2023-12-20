@@ -2,6 +2,7 @@ package org.example;
 
 
 import org.example.bean.BeancurdV;
+import org.example.bean.Person;
 import org.objectweb.asm.ClassReader;
 import org.objectweb.asm.ClassWriter;
 
@@ -13,14 +14,14 @@ public class Main {
     public static void main(String[] args) {
 //        System.out.println("Hello world!");
 //        System.out.println();
-//
-//        ClassPrinter cp = new ClassPrinter();
-//        try {
-//            ClassReader cr = new ClassReader("java.lang.Runnable");
-//            cr.accept(cp, 0);
-//        } catch (IOException e) {
-//            throw new RuntimeException(e);
-//        }
+
+        ClassPrinter cp = new ClassPrinter();
+        try {
+            ClassReader cr = new ClassReader("java.lang.Runnable");
+            cr.accept(cp, 0);
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
 
 //        byte[] b = generateClass();
 //
@@ -34,6 +35,12 @@ public class Main {
         BeancurdV bv = new BeancurdV("bv", 32, 1);
         bv.setDirection("Android");
         System.out.println(bv.getName());
+
+
+        // 哥斯拉和金刚交朋友
+        Person gezzila = new Person("gezzila", 400, 1);
+        Person kingkong = new Person("kingkong", 35, 1);
+        kingkong.makeFriend(gezzila);
 
     }
 

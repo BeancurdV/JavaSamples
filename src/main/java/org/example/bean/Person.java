@@ -1,6 +1,6 @@
 package org.example.bean;
 
-public class Person {
+public class Person implements IFriendly{
     private String name;
     private int age;
 
@@ -35,5 +35,10 @@ public class Person {
 
     public void setSender(int sender) {
         this.sender = sender;
+    }
+
+    @Override
+    public void makeFriend(IFriendly f) {
+        System.out.println("I am " + name + " , and glad to be a friend of " + f);
     }
 }
