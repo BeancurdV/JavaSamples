@@ -1,6 +1,7 @@
 package org.example;
 
 
+import org.example.bean.BeancurdV;
 import org.objectweb.asm.ClassReader;
 import org.objectweb.asm.ClassWriter;
 
@@ -21,13 +22,19 @@ public class Main {
 //            throw new RuntimeException(e);
 //        }
 
-        byte[] b = generateClass();
+//        byte[] b = generateClass();
+//
+//        MyClassLoader myCL = new MyClassLoader();
+//        // 通过CLassLoader加载类
+//        Class cl = myCL.defineClass("pkg.Comparable", b);
+//
+//        System.out.println(cl.getCanonicalName());
 
-        MyClassLoader myCL = new MyClassLoader();
-        // 通过CLassLoader加载类
-        Class cl = myCL.defineClass("pkg.Comparable", b);
 
-        System.out.println(cl.getCanonicalName());
+        BeancurdV bv = new BeancurdV("bv", 32, 1);
+        bv.setDirection("Android");
+        System.out.println(bv.getName());
+
     }
 
 
