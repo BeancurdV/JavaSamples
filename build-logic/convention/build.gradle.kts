@@ -30,8 +30,8 @@ gradlePlugin {
         // 注册插件，这样可以在其他地方 apply
         register("LogPlugin.kt") {
             // 注册插件的 id，需要应用该插件的模块可以通过 apply 这个 id
-            id = "me.hjhl.gradle.plugin.log"
-            implementationClass = "LogPlugin.kt"
+            id = "com.beancurdv.gradle.plugin.log"
+            implementationClass = "LogPlugin"
         }
     }
 }
