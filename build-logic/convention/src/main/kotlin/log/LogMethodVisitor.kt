@@ -1,3 +1,5 @@
+package log
+
 import org.objectweb.asm.MethodVisitor
 import org.objectweb.asm.Opcodes
 import org.objectweb.asm.commons.AdviceAdapter
@@ -13,7 +15,7 @@ class LogMethodVisitor(
 
     override fun onMethodEnter() {
         // 往栈上增加两个局部变量
-        mv.visitLdcInsn("LogMethodVisitor")
+        mv.visitLdcInsn("log.LogMethodVisitor")
         mv.visitLdcInsn("enter:$className.$name")
 
         mv.visitMethodInsn(Opcodes.INVOKESTATIC,

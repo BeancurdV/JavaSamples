@@ -1,3 +1,6 @@
+package log
+
+import LogTransform
 import com.android.build.api.instrumentation.FramesComputationMode
 import com.android.build.api.instrumentation.InstrumentationScope
 import com.android.build.api.variant.AndroidComponentsExtension
@@ -8,7 +11,7 @@ import org.gradle.api.Project
 class LogPlugin : Plugin<Project> {
 
     companion object {
-        private const val TAG = "LogPlugin"
+        private const val TAG = "log.LogPlugin"
     }
 
     override fun apply(target: Project) {
