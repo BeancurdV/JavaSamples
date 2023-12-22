@@ -4,6 +4,7 @@ import com.android.build.api.instrumentation.ClassData
 import com.android.build.api.instrumentation.InstrumentationParameters
 import log.LogClassVisitor
 import log.LogMethodVisitor
+import opclass.ClassPrinter
 import org.objectweb.asm.ClassVisitor
 import org.objectweb.asm.MethodVisitor
 import org.objectweb.asm.Opcodes
@@ -18,6 +19,7 @@ abstract class LogTransform : AsmClassVisitorFactory<InstrumentationParameters.N
         classContext: ClassContext,
         nextClassVisitor: ClassVisitor
     ): ClassVisitor {
-        return LogClassVisitor(classContext, nextClassVisitor)
+//        return LogClassVisitor(classContext, nextClassVisitor)
+        return ClassPrinter("Person",nextClassVisitor)
     }
 }
