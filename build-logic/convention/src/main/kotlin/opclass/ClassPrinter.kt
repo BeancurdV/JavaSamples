@@ -1,6 +1,7 @@
 package opclass
 
 import org.objectweb.asm.*
+import org.objectweb.asm.Opcodes.*
 
 /**
  * 打印Class内容
@@ -87,14 +88,44 @@ class ClassPrinter(private val targetName: String, nextClassVisitor: ClassVisito
         if (isFind) {
             println("}")
             if (!isHasSex) {
-                // 插入一个 public String sex = "男"
+                // 插入一个 public static String n = "男"
                 cv.visitField(Opcodes.ACC_PUBLIC + Opcodes.ACC_STATIC,
+                    "n",
+                    "Ljava/lang/String;",
+                    null,
+                    "a"
+                ).visitEnd()
+
+
+                // 插入一个 public String sex = "男"
+                cv.visitField(Opcodes.ACC_PUBLIC,
                     "sex",
                     "Ljava/lang/String;",
                     null,
                     "a"
                 ).visitEnd()
                 println("insert sex success .....")
+
+                // 增加一个Setter方法
+                val mv = cv.visitMethod(
+                    Opcodes.ACC_PUBLIC,
+                    "getSex",
+                    "()Ljava/lang/String;",
+                    null,
+                    null
+                )
+                mv.visitCode()
+                mv.visitVarInsn(ALOAD, 0)
+                mv.visitFieldInsn(
+                    GETFIELD,
+                    "com/beancurdv/techdojo/bean/Person",
+                    "sex",
+                    "Ljava/lang/String;"
+                )
+                mv.visitInsn(IRETURN)
+                mv.visitMaxs(1, 1)
+                mv.visitEnd()
+
             }
         }
 
