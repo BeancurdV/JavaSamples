@@ -15,6 +15,8 @@ class ClassPrinter(private val targetName: String, nextClassVisitor: ClassVisito
 
     private var isFind = false
 
+    private var isHasSex = false
+
     override fun visit(
         version: Int,
         access: Int,
@@ -32,6 +34,9 @@ class ClassPrinter(private val targetName: String, nextClassVisitor: ClassVisito
                     }
                 } {"
             )
+            // 优先生成Living接口 TODO zfc 1 生成类
+//            ClassGenerator().generatorInterface(this.cv)
+//            ClassGenerator().generatorInterface("/Users/zhangfengcheng/beancurd/android/dojo/app/build/intermediates/javac/debug/classes/com/beancurdv/techdojo/bean/Living.class")
         } else {
             isFind = false
         }
@@ -49,6 +54,10 @@ class ClassPrinter(private val targetName: String, nextClassVisitor: ClassVisito
         if (isFind) {
             println("   $access $descriptor $name = $value ;")
         }
+
+        if(name == "sex"){
+            isHasSex = true
+        }
         return super.visitField(access, name, descriptor, signature, value)
     }
 
@@ -61,6 +70,15 @@ class ClassPrinter(private val targetName: String, nextClassVisitor: ClassVisito
     ): MethodVisitor? {
         if (isFind) {
             println("   $access $descriptor $name () throws $exceptions ; ")
+
+            // 修改setAge为V2方法
+//            if(name == "setAge") {
+//                return super.visitMethod(access, name+"_V2", descriptor, signature, exceptions)
+//            }
+            // 删除getAge方法
+            if(name == "getAge") {
+                return null
+            }
         }
         return super.visitMethod(access, name, descriptor, signature, exceptions)
     }
@@ -68,7 +86,19 @@ class ClassPrinter(private val targetName: String, nextClassVisitor: ClassVisito
     override fun visitEnd() {
         if (isFind) {
             println("}")
+            if (!isHasSex) {
+                // 插入一个 public String sex = "男"
+                cv.visitField(Opcodes.ACC_PUBLIC + Opcodes.ACC_STATIC,
+                    "sex",
+                    "Ljava/lang/String;",
+                    null,
+                    "a"
+                ).visitEnd()
+                println("insert sex success .....")
+            }
         }
+
+
         super.visitEnd()
     }
 }

@@ -2,12 +2,8 @@ import com.android.build.api.instrumentation.AsmClassVisitorFactory
 import com.android.build.api.instrumentation.ClassContext
 import com.android.build.api.instrumentation.ClassData
 import com.android.build.api.instrumentation.InstrumentationParameters
-import log.LogClassVisitor
-import log.LogMethodVisitor
 import opclass.ClassPrinter
 import org.objectweb.asm.ClassVisitor
-import org.objectweb.asm.MethodVisitor
-import org.objectweb.asm.Opcodes
 
 abstract class LogTransform : AsmClassVisitorFactory<InstrumentationParameters.None> {
 
