@@ -30,6 +30,10 @@ class MainActivity : AppCompatActivity() {
                 Log.e("zfc","f = $f")
                 Log.e("zfc","mv = $mv")
                 Toast.makeText(this@MainActivity, "hello", 0).show()
+
+                Thread() {
+                    p.setName("zfc",true)
+                }.start()
             }
         }
     }

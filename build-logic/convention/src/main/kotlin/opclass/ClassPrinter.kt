@@ -44,7 +44,6 @@ class ClassPrinter(private val targetName: String, nextClassVisitor: ClassVisito
         super.visit(version, access, name, signature, superName, interfaces)
     }
 
-
     override fun visitField(
         access: Int,
         name: String?,
@@ -79,6 +78,17 @@ class ClassPrinter(private val targetName: String, nextClassVisitor: ClassVisito
             // 删除getAge方法
             if(name == "getAge") {
                 return null
+            }
+
+            // 利用MethodVisitor ， 修改指令 p50页
+            if(name == "setName") {
+                val superMv = super.visitMethod(access, name, descriptor, signature, exceptions)
+                val startIndex = if(descriptor == "(Ljava/lang/String;)V") {
+                    2
+                }  else {
+                    3*2
+                }
+                return StaticsTimerMethodAdapter(superMv,startIndex)
             }
         }
         return super.visitMethod(access, name, descriptor, signature, exceptions)
