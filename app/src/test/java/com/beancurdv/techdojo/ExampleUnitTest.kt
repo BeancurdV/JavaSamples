@@ -3,6 +3,7 @@ package com.beancurdv.techdojo
 import org.junit.Test
 
 import org.junit.Assert.*
+import java.io.File
 
 /**
  * Example local unit test, which will execute on the development machine (host).
@@ -12,6 +13,25 @@ import org.junit.Assert.*
 class ExampleUnitTest {
     @Test
     fun addition_isCorrect() {
-        assertEquals(4, 2 + 2)
+//        assertEquals(4, 2 + 2)
+
+//        val process = ProcessBuilder(
+//            "git",
+//            "rev-parse --short HEAD"
+//        ).start()
+        val process = Runtime.getRuntime().exec("git rev-parse --short HEAD",
+            null,
+        File("D:\\beancurd\\android_project\\JavaSamples")
+        )
+//        process.waitFor()
+        val error = process.errorStream.readBytes().toString()
+        if (error.isNotBlank()) {
+            System.err.println("test Git error : $error")
+        }
+        var gitVersion = process.inputStream.readBytes().toString()
+//        gitVersion = "12354"
+
+        println("gitVersion = $gitVersion")
+
     }
 }

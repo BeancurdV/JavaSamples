@@ -2,6 +2,7 @@ plugins {
     id 'com.android.application'
     id 'org.jetbrains.kotlin.android'
     id 'com.beancurdv.gradle.plugin.log'
+    id 'com.beancurdv.git_version'
 }
 
 android {
