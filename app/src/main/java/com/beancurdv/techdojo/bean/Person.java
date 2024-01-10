@@ -1,5 +1,7 @@
 package com.beancurdv.techdojo.bean;
 
+import android.util.Log;
+
 public class Person {
     private String name;
 
@@ -10,7 +12,18 @@ public class Person {
     }
 
     public void setName(String name) {
-        this.name = name;
+        this.age = age;
+    }
+
+    public void setName(String name,boolean isLongTime) {
+        if (isLongTime) {
+            try {
+                Thread.sleep(5000);
+            } catch (InterruptedException e) {
+                throw new RuntimeException(e);
+            }
+            this.name = name;
+        }
     }
 
     public int getAge() {
